@@ -37,15 +37,7 @@ def cv_update(game):
     vermelho_existe = np.sum(vermelho_mascara)
     verde_existe = np.sum(verde_mascara)
 
-    if verde_existe > 500000: #número de pixeis verdes > 500 000
-        game.paddle.move(+3)
-    else:
-        game.paddle.move(0)
-
-    if vermelho_existe > 500000:
-        game.paddle.move(-3)
-    else:
-        game.paddle.move(0)
+    conditions(game, verde_existe, vermelho_existe)
 
     game.after(1, cv_update, game)
 
@@ -90,3 +82,17 @@ def cv_output_green(image):
     cv2.imshow("Verde", image)
     # rest of output rendering
     cv2.waitKey(1)
+
+
+def conditions(game, verde_existe, vermelho_existe):
+
+    if verde_existe > 500000: #número de pixeis verdes > 500 000
+        game.paddle.move(+3)
+    else:
+        game.paddle.move(0)
+
+    if vermelho_existe > 500000:
+        game.paddle.move(-3)
+    else:
+        game.paddle.move(0)
+
